@@ -3,6 +3,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
 import data from './data.js';
 import Detail from './pages/Detail.js';
+import About from './pages/About.js';
 import { Routes, Route, Link, Router, useNavigate, Outlet } from 'react-router-dom';
 
 function App() {
@@ -33,11 +34,17 @@ function App() {
 
       <Routes>
         <Route path="/" element={ <div>첫 화면입니다.</div> } />
-        <Route path="/detail" element={
-          <div>
-            <Detail />
-          </div>
-        } />
+        <Route path="/detail" element={ <div><Detail /></div> } />
+        <Route path="/about" element={ <div><About /></div> } />
+        
+        <Route path="/about" element={ <div><About /></div> }>
+          <Route path="member" element={ <div>멤버</div> } />
+          <Route path="location" element={ <div>위치</div> } />
+        </Route>
+        
+        {/* <Route path="/about/member" element={ <div><About /></div> } />
+        <Route path="/about/location" element={ <div><About /></div> } /> */}
+        
         <Route path="*" element={ <div>404 not found</div> } />
       </Routes>
 
