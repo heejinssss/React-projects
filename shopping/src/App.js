@@ -3,24 +3,26 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
 import data from './data.js';
 import Detail from './pages/Detail.js';
-import { Routes, Route, Link, Router } from 'react-router-dom';
+import { Routes, Route, Link, Router, useNavigate, Outlet } from 'react-router-dom';
 
 function App() {
 
   let [shoes] = useState(data);
+  let navigate = useNavigate();
 
   return (
     <div className="App">
 
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Shopping</Navbar.Brand>
+          <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Link to="/">홈</Link>
-            <Link to="/detail">상세페이지</Link>
-            {/* <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link> */}
+            {/* <Link to="/">홈</Link>
+            <Link to="/detail">상세페이지</Link> */}
+            {/* <Nav.Link onClick={()=>{ navigate(1) }}>앞으로</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate(-1) }}>뒤로가기</Nav.Link> */}
+            <Nav.Link onClick={()=>{ navigate('/') }}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate('/detail') }}>Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -36,6 +38,7 @@ function App() {
             <Detail />
           </div>
         } />
+        <Route path="*" element={ <div>404 not found</div> } />
       </Routes>
 
       {/* <div className="container">
