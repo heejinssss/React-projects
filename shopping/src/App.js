@@ -4,6 +4,7 @@ import './App.css';
 import data from './data.js';
 import Detail from './pages/Detail.js';
 import About from './pages/About.js';
+import Eventpage from './pages/Eventpage.js';
 import { Routes, Route, Link, Router, useNavigate, Outlet } from 'react-router-dom';
 
 function App() {
@@ -37,11 +38,18 @@ function App() {
         <Route path="/detail" element={ <div><Detail /></div> } />
         <Route path="/about" element={ <div><About /></div> } />
         
+        <Route path="/detail/:id" element={ <div><Detail shoes={shoes} /></div>} />
+
         <Route path="/about" element={ <div><About /></div> }>
           <Route path="member" element={ <div>멤버</div> } />
           <Route path="location" element={ <div>위치</div> } />
         </Route>
         
+        <Route path="/event" element={ <div><Eventpage /></div> }>
+          <Route path="one" element={ <div>선착순 양배추</div> } />
+          <Route path="two" element={ <div>내 당신은 양배추입니다</div> } />
+        </Route>
+
         {/* <Route path="/about/member" element={ <div><About /></div> } />
         <Route path="/about/location" element={ <div><About /></div> } /> */}
         
