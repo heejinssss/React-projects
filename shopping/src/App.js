@@ -37,6 +37,7 @@ function App() {
       <button onClick={()=>{ 
         axios.get('https://codingapple1.github.io/shop/data2.jsn')
         .then((res)=>{ console.log(res.data) }) // 서버에서 가져온 데이터
+        .catch(()=>{ console.log('요청 실패') }) // 요청 실패시 실행
         }}>버튼</button>
 
       <Routes>
