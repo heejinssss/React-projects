@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Nav, Tab } from 'react-bootstrap';
+import { Context1 } from './../App.js';
 
 // let YelloBtn = styled.button`
 //   background: ${ props => props.bg };
@@ -18,6 +19,8 @@ import { Nav, Tab } from 'react-bootstrap';
 //   `
 
 function Detail(props) {
+
+  let { stock, shoes } = useContext(Context1); // 보관함 해체 함수
   
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
@@ -37,7 +40,7 @@ function Detail(props) {
       clearTimeout(dc); // 재렌더링으로 인한 중복 요청을 막을 수 있음 (ex. 기존 데이터 요청 제거)
       console.log('useEffect 실행 전입니다'); // 순서 이슈 해결 중
     }
-  })
+  }, [])
 
   useEffect(()=>{
     let timer = setTimeout(()=>{ setFade('end') }, 100);
@@ -46,7 +49,7 @@ function Detail(props) {
       clearTimeout(timer);
       setFade('');
     }
-  }, [tab])
+  }, [])
 
   return (
     <div className={ 'container start ' + fade }>
@@ -60,7 +63,6 @@ function Detail(props) {
         )
         : null
       }
-      { count }
       <button onClick={()=>{ setCount(count+1) }}>버튼</button>
       {/* <BlackBox>
         <YelloBtn bg="green">버튼</YelloBtn>
@@ -104,6 +106,7 @@ function Detail(props) {
 function TabContent({tab}) { // props 대신 쓸 수 있는 문법
 
   let [fade, setFade] = useState('');
+  let { stock } = useContext(Context1); // 보관함 해체 함수
 
   useEffect(()=>{
     let timer = setTimeout(()=>{ setFade('end') }, 100);
@@ -114,7 +117,9 @@ function TabContent({tab}) { // props 대신 쓸 수 있는 문법
   }, [tab])
 
   return ( <div className={ 'start ' + fade }>
-  { [<div>1번째</div>, <div>2번째</div>, <div>3번째</div>][tab] }
+  { [<div>{ stock }</div>,
+     <div>2</div>,
+     <div>3</div>][tab] }
   </div> )
 }
 

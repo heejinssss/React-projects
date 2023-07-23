@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
 import data from './data.js';
@@ -8,11 +8,17 @@ import Eventpage from './pages/Eventpage.js';
 import { Routes, Route, Link, Router, useNavigate, Outlet } from 'react-router-dom';
 import axios from 'axios';
 
+export let Context1 = createContext()
+
+// let Context1 = createContext() // state 보관함
+
+
 function App() {
 
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
   let [count, setCount] = useState(0);
+  let [stock, setStock] = useState([10, 11, 12])
 
   return (
     <div className="App">
@@ -40,7 +46,11 @@ function App() {
         <Route path="/detail" element={ <div><Detail /></div> } />
         <Route path="/about" element={ <div><About /></div> } />
         
-        <Route path="/detail/:id" element={ <div><Detail shoes={shoes} /></div>} />
+        <Route path="/detail/:id" element={
+          <Context1.Provider value={{ stock, shoes }}>
+            <Detail shoes={ shoes } />
+          </Context1.Provider>
+        } />
 
         <Route path="/about" element={ <div><About /></div> }>
           <Route path="member" element={ <div>멤버</div> } />
