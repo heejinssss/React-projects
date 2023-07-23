@@ -31,7 +31,7 @@ function Detail(props) {
     return ()=>{
       // useEffect 실행 전에 실행되는 코드
       // clean up function
-      console.log('useEffect 실행 전입니다')
+      console.log('useEffect 실행 전입니다') // 순서 이슈 해결 중
       clearTimeout(timer) // 재렌더링으로 인한 중복 요청을 막을 수 있음 (ex. 기존 데이터 요청 제거)
     }
   })
