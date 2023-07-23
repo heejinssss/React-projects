@@ -6,6 +6,7 @@ import Detail from './pages/Detail.js';
 import About from './pages/About.js';
 import Eventpage from './pages/Eventpage.js';
 import { Routes, Route, Link, Router, useNavigate, Outlet } from 'react-router-dom';
+import axios from 'axios';
 
 function App() {
 
@@ -33,7 +34,13 @@ function App() {
         style={{ backgroundImage : 'url(./bg.png)' }}>
       </div>
 
+      <button onClick={()=>{ 
+        axios.get('https://codingapple1.github.io/shop/data2.jsn')
+        .then((res)=>{ console.log(res.data) }) // 서버에서 가져온 데이터
+        }}>버튼</button>
+
       <Routes>
+
         <Route path="/" element={ <div>첫 화면입니다.</div> } />
         <Route path="/detail" element={ <div><Detail /></div> } />
         <Route path="/about" element={ <div><About /></div> } />
