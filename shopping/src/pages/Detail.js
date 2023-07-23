@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { Nav, Tab } from 'react-bootstrap';
 
 // let YelloBtn = styled.button`
 //   background: ${ props => props.bg };
@@ -20,6 +21,7 @@ function Detail(props) {
   
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
+  let [tab, setTab] = useState(0);
   
   let {id} = useParams(); // 유저가 URL 파라미터에 입력한 값을 가져올 때
   let ids = Number(id)+1;
@@ -66,8 +68,41 @@ function Detail(props) {
           <button className="btn btn-danger">주문하기</button> 
         </div>
       </div>
+
+      <Nav variant="tabs" defaultActiveKey="link0">
+
+        <Nav.Item>
+          <Nav.Link eventKey="link0" onClick={()=>{ setTab(0) }}>버튼0</Nav.Link>
+        </Nav.Item>
+        
+        <Nav.Item>
+          <Nav.Link eventKey="link1" onClick={()=>{ setTab(1) }}>버튼1</Nav.Link>
+        </Nav.Item>
+        
+        <Nav.Item>
+          <Nav.Link eventKey="link2" onClick={()=>{ setTab(2) }}>버튼2</Nav.Link>
+        </Nav.Item>
+
+      </Nav>
+      <TabContent tab={tab} />
+
     </div>
   )
 }
+
+// if 대신 사용 가능
+function TabContent({tab}) { // props 대신 쓸 수 있는 문법
+  return [<div>1번째</div>, <div>2번째</div>, <div>3번째</div>][tab]
+}
+
+// function TabContent({tab}) { // props 대신 쓸 수 있는 문법
+//   if (tab == 0) {
+//     return <div>내용 0</div>
+//   } else if (tab == 1) {
+//     return <div>내용 1</div>
+//   } else if (tab == 2) {
+//     return <div>내용 2</div>
+//   }
+// }
 
 export default Detail;

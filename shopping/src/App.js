@@ -36,7 +36,6 @@ function App() {
       </div>
 
       <Routes>
-
         <Route path="/" element={ <div>첫 화면입니다.</div> } />
         <Route path="/detail" element={ <div><Detail /></div> } />
         <Route path="/about" element={ <div><About /></div> } />
@@ -116,8 +115,6 @@ function App() {
         }}>버튼</button>
 
     </div>
-
-
   )
 }
 
@@ -125,7 +122,7 @@ function Card(props) {
   return (
 
     <div>
-      <img className="shoes" src={'https://codingapple1.github.io/shop/shoes' + (props.i) + '.jpg'} style={{ width: "40%" }} alt="shoes" />
+      <img className="shoes" src={'https://codingapple1.github.io/shop/shoes' + (props.i+1) + '.jpg'} style={{ width: "40%" }} alt="shoes" />
       <h4>{ props.shoes.title }</h4>
       <h5>{props.shoes.content }</h5>
       <h5>{ props.shoes.price }</h5>
