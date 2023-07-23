@@ -1,10 +1,13 @@
 import { Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeName, increaseAge } from '../store/userSlice.js';
 
 function Cart() {
 
   let state = useSelector((state)=>{ return state }) // Redux store에서 모든 state 가져옴
   console.log(state);
+  let dispatch = useDispatch(); // store.js로 요청을 보내는 함수
+
 //   // 중괄호와 return은 동시에 생략 가능
 //   let state = useSelector((state)=> state ) // Redux store에서 모든 state 가져옴
 //   console.log(state);
@@ -13,6 +16,9 @@ function Cart() {
 
   return (
     <div>
+    <h6>{state.user.age}살 { state.user.name }의 장바구니</h6>
+    <button onClick={()=>{dispatch(changeName())}}>이름이 바뀌는 버튼</button>
+    <button onClick={()=>{dispatch(increaseAge())}}>나이가 올라가는 버튼</button>
       <table>
         <Table>
         <thead>
@@ -31,6 +37,7 @@ function Cart() {
                 <td>{ state.cart[i].id }</td>
                 <td>{ state.cart[i].name }</td>
                 <td>{ state.cart[i].count }</td>
+                <td><button onClick={()=>{ }}>+</button></td>
               </tr>
             )
           }
