@@ -22,24 +22,34 @@ function Detail(props) {
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
   let [tab, setTab] = useState(0);
+  let [fade, setFade] = useState('');
   
   let {id} = useParams(); // 유저가 URL 파라미터에 입력한 값을 가져올 때
   let ids = Number(id)+1;
 
   useEffect(()=>{
-    let timer = setTimeout(()=>{ setAlert(false) }, 5000) // ms 단위
-    console.log('useEffect 실행 중입니다')
+    let dc = setTimeout(()=>{ setAlert(false) }, 5000); // ms 단위
+    console.log('useEffect 실행 중입니다');
     
     return ()=>{
       // useEffect 실행 전에 실행되는 코드
       // clean up function
-      console.log('useEffect 실행 전입니다') // 순서 이슈 해결 중
-      clearTimeout(timer) // 재렌더링으로 인한 중복 요청을 막을 수 있음 (ex. 기존 데이터 요청 제거)
+      clearTimeout(dc); // 재렌더링으로 인한 중복 요청을 막을 수 있음 (ex. 기존 데이터 요청 제거)
+      console.log('useEffect 실행 전입니다'); // 순서 이슈 해결 중
     }
   })
 
+  useEffect(()=>{
+    let timer = setTimeout(()=>{ setFade('end') }, 100);
+    
+    return ()=>{
+      clearTimeout(timer);
+      setFade('');
+    }
+  }, [tab])
+
   return (
-    <div className="container">
+    <div className={ 'container start ' + fade }>
       {
         alert == true
         ? (
@@ -92,7 +102,20 @@ function Detail(props) {
 
 // if 대신 사용 가능
 function TabContent({tab}) { // props 대신 쓸 수 있는 문법
-  return [<div>1번째</div>, <div>2번째</div>, <div>3번째</div>][tab]
+
+  let [fade, setFade] = useState('');
+
+  useEffect(()=>{
+    let timer = setTimeout(()=>{ setFade('end') }, 100);
+    return ()=>{
+      clearTimeout(timer);
+      setFade('');
+    }
+  }, [tab])
+
+  return ( <div className={ 'start ' + fade }>
+  { [<div>1번째</div>, <div>2번째</div>, <div>3번째</div>][tab] }
+  </div> )
 }
 
 // function TabContent({tab}) { // props 대신 쓸 수 있는 문법
