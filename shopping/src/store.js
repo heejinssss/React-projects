@@ -10,22 +10,6 @@ let stock = createSlice({
   initialState: [10, 11, 12]
 })
 
-
-// let id = createSlice({
-//   name: 'id_info',
-//   initialState: [0, 2]
-// })
-
-// let name = createSlice({
-//   name: 'name_info',
-//   initialState: ['White and Black', 'Grey Yordan']
-// })
-
-// let count = createSlice({
-//   name: 'count_info',
-//   initialState: [2, 1]
-// })
-
 let cart = createSlice({
   name: 'cart',
   initialState: [
